@@ -1,0 +1,204 @@
+{% extends "main/Base.html" %}
+{% block content %}
+{% load static %}
+<body>
+
+  <title>Services</title>
+  <div id="Header">
+  </div>
+
+  <form id = "Form1" method = "post">
+    {% csrf_token %}
+
+    <div class="row">
+      <div class="input-field col s6">
+        <input name = 'username' id="user_name2" type="text" class="validate" required>
+        <label class="active" for="first_name2">User Name</label>
+      </div>
+      <div class="input-field col s7">
+        <input name ='first'  id="first_name2" type="text" class="validate">
+        <label class="active" for="first_name2">First Name</label>
+      </div>
+      <div class="input-field col s7">
+        <input name = 'last'  id="last_name2" type="text" class="validate">
+        <label class="active" for="first_name2">Last Name</label>
+      </div>
+    </div>
+  <input id = "SubmitButton" type="submit" value="Submit">
+  <ul>
+  <li>
+    <input name = "Go" type="checkbox" id="myCheckbox1"  onclick="clicked(this.id)"/>
+    <label  for="myCheckbox1"><img src="{% static 'main/images/Go.jpg' %}" /></label>
+  </li>
+  <li>
+
+    <input name = "instabug" type="checkbox" id="myCheckbox2" onclick="clicked(this.id)"/>
+    <label for="myCheckbox2"><img src="{% static 'main/images/instabug-logo.png' %}" /></label>
+  </li>
+  <li>
+
+    <input name = "ACM" type="checkbox" id="myCheckbox3" onclick="clicked(this.id)"/>
+    <label for="myCheckbox3"><img src="{% static 'main/images/ACM.png' %}" /></label>
+  </li>
+  <li>
+
+    <input name = "apple" type="checkbox" id="myCheckbox4" onclick="clicked(this.id)"/>
+    <label for="myCheckbox4"><img src=" {% static 'main/images/apple.png' %}" /></label>
+  </li>
+
+  <li>
+
+    <input  name = "morty" type="checkbox" id="myCheckbox5" onclick="clicked(this.id)"/>
+    <label for="myCheckbox5"><img src="{% static 'main/images/morty.png' %}" /></label>
+  </li>
+
+  <li>
+
+    <input  name = "python" type="checkbox" id="myCheckbox6" onclick="clicked(this.id)"/>
+    <label for="myCheckbox6"><img src="{% static 'main/images/python.png' %}" /></label>
+  </li>
+
+  <li>
+
+    <input name = "Quora" type="checkbox" id="myCheckbox7" onclick="clicked(this.id)"/>
+    <label for="myCheckbox7"><img src="{% static 'main/images/Quora.png' %}" /></label>
+  </li>
+
+  <li>
+
+    <input  name = "samsung" type="checkbox" id="myCheckbox8" onclick="clicked(this.id)"/>
+    <label for="myCheckbox8"><img src="{% static 'main/images/samsung.png' %}" /></label>
+  </li>
+
+  <li>
+
+    <input  name = "Rick" type="checkbox" id="myCheckbox9" onclick="clicked(this.id)"/>
+    <label for="myCheckbox9"><img src="{% static 'main/images/Rick.png' %}" /></label>
+  </li>
+
+  <li>
+
+    <input  name = "jerry" type="checkbox" id="myCheckbox10" onclick="clicked(this.id)"/>
+    <label width = '10' for="myCheckbox10"><img src="{% static 'main/images/jerry.png' %}" /></label>
+  </li>
+</ul>
+</form>
+
+  <script>
+    var clicks = [];
+    function clicked(clicked_id){
+      if(clicks.length == 0){
+        clicks.push(clicked_id);
+      }else{
+      check(clicked_id);
+      }
+    }
+
+    //checks if image is clicked or not
+    function check(clicked_id){
+      var index = clicks.indexOf(clicked_id);
+      if( index != -1){
+        clicks.splice(index,1);
+      }else{
+        clicks.push(clicked_id);
+      }
+      display();
+    }
+
+    //shows current sequence
+    function display(){
+      var i;
+      var sequence = []
+      for(i =0; i < clicks.length;i++){
+        sequence[i] = document.getElementById(clicks[i]).name;
+      }
+      alert(sequence);
+    }
+
+  </script>
+</body>
+  <style>
+
+    .row{
+      width : 50%;
+      margin-top:10%;
+    }
+    #carouselExampleControls{
+    }
+    .body{
+    background-color:coral;
+    }
+    #Header{
+      margin-top : 260px;
+      margin-left :40%;
+    }
+    #Form1{
+      margin-left : 340px;
+    }
+    #SubmitButton{
+      margin-left : 380px;
+    }
+ul {
+  list-style-type: none;
+}
+
+li {
+  display: inline-block;
+}
+
+input[type="checkbox"][id^="myCheckbox"] {
+  display: none;
+}
+
+label {
+  border: 1px solid #fff;
+  padding: 10px;
+  display: block;
+  position: relative;
+  margin: 10px;
+  cursor: pointer;
+}
+
+label:before {
+  background-color: white;
+  color: white;
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  border: 1px solid grey;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 28px;
+  transition-duration: 0.4s;
+  transform: scale(0);
+}
+
+label img {
+  height: 200px;
+  width: 200px;
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
+}
+
+:checked + label {
+  border-color: green;
+}
+
+:checked + label:before {
+  content: "✓";
+  background-color: green;
+  transform: scale(1.5);
+}
+
+:checked + label img {
+  transform: scale(0.9);
+  /* box-shadow: 0 0 5px #333; */
+  z-index: -1;
+}
+</style>
+
+  {% endblock %}
